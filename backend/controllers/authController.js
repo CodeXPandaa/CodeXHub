@@ -101,3 +101,17 @@ export const getMe = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+// @desc    Get all teachers
+// @route   GET /api/auth/teachers
+// @access  Private
+export const getTeachers = async (req, res) => {
+  try {
+    const teachers = await User.find({ role: 'teacher' }).select('-password');
+
+    res.json(teachers);
+  } catch (error) {
+    console.error('Get teachers error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};

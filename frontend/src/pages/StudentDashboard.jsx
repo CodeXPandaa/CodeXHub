@@ -19,24 +19,31 @@ const StudentDashboard = () => {
     guideId: '',
   });
 
+  // Fetch all teachers for project request
+  const fetchTeachers = async () => {
+    try {
+      const response = await projectsAPI.getTeachers();
+      setTeachers(response.data);
+    } catch (error) {
+      console.error('Failed to fetch teachers:', error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const [projectsRes, analyticsRes] = await Promise.all([
+      const [projectsRes, analyticsRes, teachersRes] = await Promise.all([
         projectsAPI.getMyProjects(),
         analyticsAPI.getStudentAnalytics(user._id),
+        projectsAPI.getTeachers(),
       ]);
 
       setProjects(projectsRes.data);
       setAnalytics(analyticsRes.data);
-
-      // Fetch teachers for project request
-      const allProjects = projectsRes.data;
-      const teacherIds = [...new Set(allProjects.map(p => p.guide?._id))];
-      // We'll get teachers from project guides
+      setTeachers(teachersRes.data);
     } catch (error) {
       console.error('Fetch error:', error);
       toast.error('Failed to load data');
@@ -67,15 +74,9 @@ const StudentDashboard = () => {
     }
   };
 
-  // Get unique teachers from projects
+  // Get available teachers
   const getAvailableTeachers = () => {
-    const guides = projects
-      .filter(p => p.guide)
-      .map(p => p.guide);
-    const uniqueGuides = guides.filter(
-      (guide, index, self) => index === self.findIndex((g) => g._id === guide._id)
-    );
-    return uniqueGuides;
+    return teachers;
   };
 
   if (loading) {

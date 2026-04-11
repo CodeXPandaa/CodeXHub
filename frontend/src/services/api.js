@@ -40,6 +40,10 @@ export const projectsAPI = {
   // Progress
   updateProgress: (id, progress) =>
     axios.patch(`${API_BASE}/projects/${id}/progress`, { progress }),
+
+  // Teachers list
+  getTeachers: () =>
+    axios.get(`${API_BASE}/auth/teachers`),
 };
 
 // WPR API
