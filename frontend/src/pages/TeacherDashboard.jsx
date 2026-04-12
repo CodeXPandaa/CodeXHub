@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { projectsAPI, analyticsAPI } from '../services/api';
 import ProjectCard from '../components/ProjectCard';
@@ -64,7 +65,9 @@ const TeacherDashboard = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Teacher Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome back, {user.name}</p>
+        <p className="text-gray-600 mt-1">
+          Welcome back, <Link to="/profile" className="font-medium text-primary-600 hover:underline">{user.name}</Link>
+        </p>
       </div>
 
       {/* Tabs */}

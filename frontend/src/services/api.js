@@ -9,6 +9,7 @@ export const authAPI = {
   register: (userData) =>
     axios.post(`${API_BASE}/auth/register`, userData),
   getMe: () => axios.get(`${API_BASE}/auth/me`),
+  updateProfile: (profileData) => axios.patch(`${API_BASE}/auth/me`, profileData),
 };
 
 // Projects API

@@ -31,13 +31,16 @@ const Navbar = () => {
               <span className="hidden sm:inline">Dashboard</span>
             </Link>
 
-            <div className="flex items-center space-x-2 text-gray-700">
+            <Link
+              to="/profile"
+              className="flex items-center space-x-2 text-gray-700 hover:text-primary-600"
+            >
               <User className="h-5 w-5" />
               <span className="hidden sm:inline">{user.name}</span>
               <span className="px-2 py-1 text-xs bg-primary-100 text-primary-800 rounded-full">
                 {user.role}
               </span>
-            </div>
+            </Link>
 
             <button
               onClick={handleLogout}

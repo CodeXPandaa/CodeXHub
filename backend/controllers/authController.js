@@ -102,6 +102,62 @@ export const getMe = async (req, res) => {
   }
 };
 
+// @desc    Update current user's profile
+// @route   PATCH /api/auth/me
+// @access  Private
+export const updateProfile = async (req, res) => {
+  try {
+    const { name, email, semester, department, password } = req.body;
+    const user = await User.findById(req.user._id).select('+password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (email && email !== user.email) {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email is already in use' });
+      }
+      user.email = email;
+    }
+
+    if (name) user.name = name;
+    if (password) user.password = password;
+
+    if (user.role === 'student') {
+      if (semester !== undefined) {
+        const parsedSemester = parseInt(semester, 10);
+        if (Number.isNaN(parsedSemester) || parsedSemester < 1 || parsedSemester > 8) {
+          return res.status(400).json({ message: 'Semester must be between 1 and 8' });
+        }
+        user.semester = parsedSemester;
+      }
+      if (department !== undefined) {
+        user.department = department;
+      }
+    } else {
+      if (department !== undefined) {
+        user.department = department;
+      }
+    }
+
+    await user.save();
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      semester: user.semester,
+      department: user.department,
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 // @desc    Get all teachers
 // @route   GET /api/auth/teachers
 // @access  Private

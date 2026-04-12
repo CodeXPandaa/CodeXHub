@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { authAPI } from '../services/api';
 
 const AuthContext = createContext(null);
 
@@ -72,12 +73,29 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      const response = await authAPI.updateProfile(profileData);
+      const updatedUser = response.data;
+
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setUser(updatedUser);
+      return { success: true, data: updatedUser };
+    } catch (error) {
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Failed to update profile',
+      };
+    }
+  };
+
   const value = {
     user,
     loading,
     login,
     register,
     logout,
+    updateProfile,
     isAuthenticated: !!user,
     isStudent: user?.role === 'student',
     isTeacher: user?.role === 'teacher',

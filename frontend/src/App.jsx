@@ -7,6 +7,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import TeacherDashboard from './pages/TeacherDashboard';
 import ProjectDetails from './pages/ProjectDetails';
 import SubmitWPR from './pages/SubmitWPR';
+import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 
 // Protected Route Component
@@ -79,6 +80,14 @@ function App() {
           element={
             <ProtectedRoute requireStudent>
               <SubmitWPR />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />
