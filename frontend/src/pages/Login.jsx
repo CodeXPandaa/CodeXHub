@@ -47,8 +47,8 @@ const Login = () => {
                 <FileText className="h-12 w-12 text-primary-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
-            <p className="text-gray-600 mt-2">Sign in to your account</p>
+            <h2 className="text-3xl font-bold text-gray-900">Suagat hai 😎</h2>
+            <p className="text-gray-600 mt-2">Sign in to your CodeXHub account</p>
           </div>
 
           {/* Form */}

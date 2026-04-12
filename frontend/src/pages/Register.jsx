@@ -64,8 +64,8 @@ const Register = () => {
                 <FileText className="h-12 w-12 text-primary-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Create Account</h2>
-            <p className="text-gray-600 mt-2">Join the project management system</p>
+            <h2 className="text-3xl font-bold text-gray-900">Naya banda? Swagat hai😎</h2>
+            <p className="text-gray-600 mt-2">Join the CodeXHub community</p>
           </div>
 
           {/* Form */}
@@ -73,7 +73,7 @@ const Register = () => {
             {/* Role Selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                I am a
+                Kon hai aap?
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
@@ -85,7 +85,7 @@ const Register = () => {
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  Student
+                  Student hu bhai 
                 </button>
                 <button
                   type="button"
@@ -96,14 +96,14 @@ const Register = () => {
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  Teacher
+                  Teacher hu bhai
                 </button>
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
+                Apna naam batana jara ?
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -113,7 +113,7 @@ const Register = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className="input-field pl-10"
-                  placeholder="John Doe"
+                  placeholder="Happy Singh"
                   required
                 />
               </div>

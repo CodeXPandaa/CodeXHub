@@ -18,7 +18,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <FileText className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">Project Manager</span>
+              <span className="text-xl font-bold text-gray-900">CodeXHub</span>
             </Link>
           </div>
 
