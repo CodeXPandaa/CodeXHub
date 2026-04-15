@@ -26,7 +26,7 @@ const app = express();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? process.env.FRONTEND_URL
-    : ['http://localhost:3000', 'http://localhost:3001'],
+    : ['https://code-x-hub.vercel.app/login', 'http://localhost:3001'],
   credentials: true,
 }));
 app.use(express.json());
