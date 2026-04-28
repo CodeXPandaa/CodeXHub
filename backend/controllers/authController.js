@@ -41,13 +41,11 @@ export const register = async (req, res) => {
       }
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)
-
     // Create user
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password,
       role,
       semester: role === 'student' ? semester : undefined,
       department: role === 'student' ? department : undefined,
@@ -78,16 +76,20 @@ export const register = async (req, res) => {
 // @route   POST /api/auth/login
 // @access  Public
 export const login = async (req, res) => {
+  console.log("login body: ", req.body)
   try {
     const { email, password } = req.body;
 
     // Check for user email
     const user = await User.findOne({ email }).select('+password');
 
-    const comparePassword = await bcrypt.compare(password, user.password);
-    console.log("Compare password result:", comparePassword);
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
 
-    if (user && comparePassword) {
+    const comparePassword = await bcrypt.compare(password, user.password);
+
+    if (comparePassword) {
       res.json({
         _id: user._id,
         name: user.name,
@@ -142,7 +144,7 @@ export const updateProfile = async (req, res) => {
     }
 
     if (name) user.name = name;
-    if (password) user.password = password;
+    if (password) user.password = await bcrypt.hash(password, 10);
 
     if (user.role === 'student') {
       if (rollNo !== undefined) {
