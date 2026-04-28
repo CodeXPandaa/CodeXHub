@@ -40,12 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', (req, res, next) => {
-  console.log('Request body:', req.body);
-  return res.json({ message: 'API is working', body: req.body }); 
-  next();
-});
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
