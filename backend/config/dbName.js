@@ -1,1 +1,1 @@
-export const DB_NAME = "CodeXHub" //change accordingly
+export const DB_NAME = "test" //change accordingly

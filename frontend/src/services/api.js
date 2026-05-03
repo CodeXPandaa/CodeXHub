@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'https://codexhub-emkc.onrender.com/api';
+const API_BASE = 'http://localhost:5000/api';
 
 // Auth API
 export const authAPI = {

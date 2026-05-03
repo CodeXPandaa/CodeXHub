@@ -43,21 +43,18 @@ const Register = () => {
       return;
     }
 
+    setLoading(true);
+    
     try {
-      const response = await axios.post(`/api/auth/register`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    });
+      const response = await axios.post(`/api/auth/register`, formData);
     navigate("/login")
     } catch (error) {
       console.error('Registration error:', error.message);
       toast.error(error.response?.data?.message || 'Registration failed');
       return;
+    } finally {
+      setLoading(false);
     }
-    
-
-    setLoading(true);
 
     // const result = await register(registerData);
 
@@ -68,7 +65,6 @@ const Register = () => {
     //   toast.error(result.message);
     // }
 
-    setLoading(false);
   };
 
   return (
